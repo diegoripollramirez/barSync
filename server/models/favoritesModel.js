@@ -16,6 +16,15 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   });
+
+  favorites.associate = (models) => {
+    favorites.belongsTo(models.user, { foreignKey: 'userId' });
+  };
+
   return favorites;
 };

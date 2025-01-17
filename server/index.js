@@ -21,8 +21,8 @@ app.use(
     cookie: {
       maxAge: 1000 * 60 * 60,
       sameSite: true,
-      httpOnly: false,
-      secure: false,
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
     },
   })
 );
@@ -34,7 +34,6 @@ app.use(router);
       console.log(`[SERVER]: server running at http://localhost:${port}`);
     });
     await db.sequelize.sync();
-
     console.log(`[DATABASE]: connection established`);
   } catch (error) {
     console.log(error);
