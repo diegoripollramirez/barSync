@@ -65,7 +65,6 @@ function RecipeList() {
 
   return (
     <>
-      <Navbar></Navbar>
       <div className="recipe-list-container">
         <div className="inventory-container">
           <p>Select the ingredients you would like to use!</p>

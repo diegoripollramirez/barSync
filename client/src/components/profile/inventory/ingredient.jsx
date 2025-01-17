@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { addIngredient } from "../../../services/inventoryServices";
+import { removeIngredient } from "../../../services/inventoryServices";
 
-function Ingredient({ ingredient, inventory, setInventory, getInventory }) {
+function Ingredient({ ingredient, inventory, setInventory }) {
   const [added, setAdded] = useState(false);
-
   const plainTextInventory = inventory.map((el) => el.strIngredient1);
 
   useEffect(() => {
@@ -16,33 +17,22 @@ function Ingredient({ ingredient, inventory, setInventory, getInventory }) {
     }
   }, [inventory]);
 
-  async function addIngredient() {
+
+  async function addToInventory(ingredient) {
     try {
-      await fetch("http://localhost:3000/inventory", {
-        method: "POST",
-        body: JSON.stringify({ strIngredient1: ingredient.strIngredient1 }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      getInventory();
+      await addIngredient(ingredient)
+      setInventory((prev) => [...prev, ingredient]);
     } catch (error) {
       console.log(error);
     }
   }
 
-  async function removeIngredient() {
+  async function removeFromInventory(ingredient) {
     try {
-      await fetch("http://localhost:3000/inventory", {
-        method: "DELETE",
-        body: JSON.stringify({ strIngredient1: ingredient.strIngredient1 }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      getInventory();
+      await removeIngredient(ingredient)
+
+      setInventory((prevInventory) => prevInventory.filter((item) => item.strIngredient1 !== ingredient.strIngredient1));
     } catch (error) {
-      console.log(error);
     }
   }
 
@@ -52,7 +42,7 @@ function Ingredient({ ingredient, inventory, setInventory, getInventory }) {
         <p>{ingredient.strIngredient1}</p>
         <button
           className="ingredient-button"
-          onClick={added ? removeIngredient : addIngredient}
+          onClick={() => (added ? removeFromInventory(ingredient) : addToInventory(ingredient))}
         >
           {added
             ? String.fromCodePoint("0x1F5D1")

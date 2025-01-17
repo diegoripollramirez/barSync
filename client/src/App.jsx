@@ -2,55 +2,66 @@ import { useCallback, useEffect, useState } from "react";
 import "./App.css";
 import Profile from "./components/profile/profile";
 import Navbar from "./components/nav-bar/nav-bar";
+import { getFavorites } from "./services/favoritesServices";
+import { getInventory } from "./services/inventoryServices";
+import IngredientSearch from "./components/profile/inventory/ingredientSearch";
+import RecipeList from "./components/profile/recipes/recipe-list";
 
 function App() {
   const [inventory, setInventory] = useState([]);
   const [favorites, setFavorites] = useState([]);
-
-  async function getInventory() {
-    const url = "http://localhost:3000/inventory";
-    try {
-      const response = await fetch(url);
-      const fetchInventory = await response.json();
-      if (fetchInventory.length) {
-        setInventory(fetchInventory);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function getFavorites() {
-    const url = "http://localhost:3000/favorites";
-    try {
-      const response = await fetch(url);
-      const fetchFavorites = await response.json();
-      if (fetchFavorites.length) {
-        setFavorites(fetchFavorites);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  const [currentTab, setCurrentTab] = useState('Home');
 
   useEffect(() => {
-    getInventory();
-    getFavorites();
+    const fetchData = async () => {
+      try {
+        const inv = await getInventory();
+        setInventory(inv);
+
+        const fav = await getFavorites();
+        setFavorites(fav);
+      } catch (error) {
+        console.log(error);
+      }
+    }; fetchData();
   }, []);
 
-  return (
-    <>
-      <Navbar></Navbar>
-      <Profile
-        inventory={inventory}
-        setInventory={setInventory}
-        getInventory={getInventory}
-        favorites={favorites}
-        setFavorites={setFavorites}
-        getFavorites={getFavorites}
-      ></Profile>
-    </>
-  );
+  function renderTab() {
+    switch (currentTab) {
+      case 'Home':
+        return (
+          <Profile
+            inventory={inventory}
+            setInventory={setInventory}
+            getInventory={getInventory}
+            favorites={favorites}
+            setFavorites={setFavorites}
+            getFavorites={getFavorites}
+          ></Profile>
+        );
+      case 'IngredientSearch':
+        return (
+          <IngredientSearch
+            inventory={inventory}
+            setInventory={setInventory}
+          />
+        );
+      case 'RecipeList':
+        return (
+          <RecipeList inventory={inventory} />
+        );
+      default:
+        return (
+          <Profile inventory={inventory} />
+        );
+    }
+  }
+
+  return <div>
+    <Navbar setCurrentTab={setCurrentTab} />
+    {renderTab()}
+  </div>
+
 }
 
 export default App;

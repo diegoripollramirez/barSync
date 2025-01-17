@@ -1,7 +1,6 @@
-import { Link } from "react-router";
 import barSyncLogo from "../../assets/barSync_logo.png";
 
-function Navbar() {
+function Navbar({setCurrentTab}) {
   return (
     <>
       <div className="navbar">
@@ -10,15 +9,15 @@ function Navbar() {
           <h1 className="title">barSync</h1>
         </div>
         <nav className="nav-buttons">
-          <Link to={"/"} className="nav-button">
+        <button className="nav-button" onClick={() => setCurrentTab('Home')}>
             <p>Home</p>
-          </Link>
-          <Link to={"/ingredientsearch"} className="nav-button">
+          </button>
+          <button className="nav-button" onClick={() => setCurrentTab('IngredientSearch')} >
             <p>Add Ingredient</p>
-          </Link>
-          <Link to={"/recipes"} className="nav-button">
+          </button>
+          <button className="nav-button" onClick={() => setCurrentTab('RecipeList')} >
             <p>Make something?</p>
-          </Link>
+          </button>
         </nav>
       </div>
     </>

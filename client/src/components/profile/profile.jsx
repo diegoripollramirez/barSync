@@ -5,14 +5,13 @@ function Profile({
   inventory,
   setInventory,
   getInventory,
-  favorites,
-  getFavorites,
-  setFavorites,
+  favorites
 }) {
   return (
     <>
       <div className="profile-container">
         <div className="profile-section-1">
+
           <div className="welcome-text">
             <h2 className="subtitle">Welcome to barSync!</h2>
             <p>
@@ -25,6 +24,7 @@ function Profile({
             </p>
             <p>Want to make something? Select the button in the bar above.</p>
           </div>
+
           <div className="inventory-container">
             <Inventory
               inventory={inventory}
@@ -33,6 +33,7 @@ function Profile({
             ></Inventory>
           </div>
         </div>
+
         <div className="profile-section-2">
           <h2 className="subtitle favorite-text">Favorites:</h2>
           <div className="recipe-favorites-container">
