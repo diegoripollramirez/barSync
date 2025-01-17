@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import Inventory from "./inventory/inventory";
 import RecipeDetail from "./recipes/recipe-detail";
 

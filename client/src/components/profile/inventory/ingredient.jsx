@@ -1,10 +1,13 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { addIngredient } from "../../../services/inventoryServices";
 import { removeIngredient } from "../../../services/inventoryServices";
 
 function Ingredient({ ingredient, inventory, setInventory }) {
+
   const [added, setAdded] = useState(false);
   const plainTextInventory = inventory.map((el) => el.strIngredient1);
+  const token = localStorage.getItem("token")
 
   useEffect(() => {
     if (
@@ -17,23 +20,29 @@ function Ingredient({ ingredient, inventory, setInventory }) {
     }
   }, [inventory]);
 
-
   async function addToInventory(ingredient) {
     try {
-      await addIngredient(ingredient)
+      if (token){
+      await addIngredient(ingredient);
+      }
       setInventory((prev) => [...prev, ingredient]);
     } catch (error) {
       console.log(error);
     }
   }
 
+  
   async function removeFromInventory(ingredient) {
     try {
-      await removeIngredient(ingredient)
-
-      setInventory((prevInventory) => prevInventory.filter((item) => item.strIngredient1 !== ingredient.strIngredient1));
-    } catch (error) {
-    }
+      if (token){
+      await removeIngredient(ingredient);
+      }
+      setInventory((prevInventory) =>
+        prevInventory.filter(
+          (item) => item.strIngredient1 !== ingredient.strIngredient1
+        )
+      );
+    } catch (error) {console.log(error)}
   }
 
   return (
@@ -42,7 +51,9 @@ function Ingredient({ ingredient, inventory, setInventory }) {
         <p>{ingredient.strIngredient1}</p>
         <button
           className="ingredient-button"
-          onClick={() => (added ? removeFromInventory(ingredient) : addToInventory(ingredient))}
+          onClick={() =>
+            added ? removeFromInventory(ingredient) : addToInventory(ingredient)
+          }
         >
           {added
             ? String.fromCodePoint("0x1F5D1")

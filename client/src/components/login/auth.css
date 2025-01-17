@@ -1,0 +1,160 @@
+.register-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 350px;
+  padding: 20px;
+  border-radius: 20px;
+  position: relative;
+  background-color: #1a1a1a;
+  color: #fff;
+  border: 1px solid #333;
+}
+
+.titlel {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -1px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
+  color: #1fa431;
+}
+
+.titlel::before,
+.titlel::after {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  left: 0px;
+  background-color: #27a035;
+}
+
+.titlel::after {
+  animation: pulse 1s linear infinite;
+}
+
+.message,
+.signin {
+  font-size: 14.5px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.signin {
+  text-align: center;
+}
+
+.signin a:hover {
+  text-decoration: underline;
+  color: royalblue;
+}
+
+.signin a {
+  color: #00bfff;
+}
+
+.flex {
+  display: flex;
+  width: 100%;
+  gap: 6px;
+}
+
+.form label {
+  position: relative;
+}
+
+.form label .input {
+  background-color: #333;
+  color: #fff;
+  width: 100%;
+  padding: 20px 5px 5px 10px;
+  outline: 0;
+  border: 1px solid rgba(105, 105, 105, 0.397);
+  border-radius: 10px;
+}
+
+.form label .input + span {
+  color: rgba(255, 255, 255, 0.5);
+  position: absolute;
+  left: 10px;
+  top: 0px;
+  font-size: 0.9em;
+  cursor: text;
+  transition: 0.3s ease;
+}
+
+.form label .input:placeholder-shown + span {
+  top: 12.5px;
+  font-size: 0.9em;
+}
+
+.form label .input:focus + span,
+.form label .input:valid + span {
+  color: #48bf67;
+  top: 0px;
+  font-size: 0.7em;
+  font-weight: 600;
+}
+
+.input {
+  font-size: medium;
+}
+
+.submit {
+  border: none;
+  outline: none;
+  padding: 10px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  transform: .3s ease;
+  background-color: #3f8b41;
+}
+
+.submit:hover {
+  background-color: #0b5d0d96;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+}
+
+.link {  
+  margin-left: 1rem;
+  border: none;
+  outline: none;
+  padding: 7px;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 16px;
+  transform: .3s ease;
+  background-color: #3f8b41;
+}
+
+.link:hover {
+  background-color: #0b5d0d96;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(0.9);
+    opacity: 1;
+  }
+
+  to {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}

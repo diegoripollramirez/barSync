@@ -1,14 +1,21 @@
-const User = require("./../models/userModel.js");
+const jwt = require("jsonwebtoken");
 
 const authMiddleware = async (req, res, next) => {
   try {
-    const { uid } = req.session;
-    const user = await User.findOne({ id: uid });
-    if (!user) throw new Error();
-    req.user = user;
+    const token = req.headers.authorization?.split(" ")[1];
+
+    if (!token) {
+      return res.status(401).json({ message: "Not authenticated" });
+    }
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.newUser = decoded;
+    console.log(decoded, process.env.JWT_SECRET)
+
     next();
   } catch (error) {
-    return res.sendStatus(401);
+    console.error(error);
+    res.status(500).json({ message: "Authentication failed", error: error.message });
   }
 };
 
