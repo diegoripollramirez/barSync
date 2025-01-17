@@ -19,6 +19,12 @@ function Navbar() {
           <Link to={"/recipes"} className="nav-button">
             <p>Make something?</p>
           </Link>
+          <Link to={"/login"} className="nav-button">
+            <p>Login</p>
+          </Link>
+          <Link to={"/register"} className="nav-button">
+            <p>Register</p>
+          </Link>
         </nav>
       </div>
     </>
