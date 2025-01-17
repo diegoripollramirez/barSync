@@ -1,6 +1,12 @@
 import barSyncLogo from "../../assets/barSync_logo.png";
 
-function Navbar({setCurrentTab}) {
+function Navbar({ setCurrentTab, setSelectedRecipe }) {
+
+  function handleButton(tab) {
+    setCurrentTab(tab);
+    setSelectedRecipe("");
+  }
+
   return (
     <>
       <div className="navbar">
@@ -9,13 +15,13 @@ function Navbar({setCurrentTab}) {
           <h1 className="title">barSync</h1>
         </div>
         <nav className="nav-buttons">
-        <button className="nav-button" onClick={() => setCurrentTab('Home')}>
+          <button className="nav-button" onClick={() => handleButton('Home')}>
             <p>Home</p>
           </button>
-          <button className="nav-button" onClick={() => setCurrentTab('IngredientSearch')} >
+          <button className="nav-button" onClick={() => handleButton('IngredientSearch')} >
             <p>Add Ingredient</p>
           </button>
-          <button className="nav-button" onClick={() => setCurrentTab('RecipeList')} >
+          <button className="nav-button" onClick={() => handleButton('RecipeList')} >
             <p>Make something?</p>
           </button>
         </nav>

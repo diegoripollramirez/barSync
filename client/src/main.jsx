@@ -9,13 +9,6 @@ import RecipeDetail from "./components/profile/recipes/recipe-detail.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/ingredientsearch" element={<IngredientSearch />} />
-        <Route path="/recipes" element={<RecipeList />} />
-        <Route path="/recipe/:recipeId" element={<RecipeDetail />} />
-      </Routes>
-    </BrowserRouter>
+    <App />
   </StrictMode>
 );

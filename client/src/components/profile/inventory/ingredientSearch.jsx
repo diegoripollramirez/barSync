@@ -52,7 +52,7 @@ function IngredientSearch({ inventory, setInventory }) {
           ></input>
         </div>
         <div className="search-results-container">
-          {filteredIngredientList.length < 20 && filteredIngredientList.length > 0
+          {searchText!="" && filteredIngredientList.length > 0 //filteredIngredientList.length < 20 &&
             ? (filteredIngredientList.map((ingredient) => {
               return (
                 <Ingredient

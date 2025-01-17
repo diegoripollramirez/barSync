@@ -1,6 +1,6 @@
 import Ingredient from "./ingredient";
 
-function Inventory({ inventory, setInventory, getInventory }) {
+function Inventory({ inventory, setInventory }) {
   return (
     <>
       <h2 className="subtitle">Inventory:</h2>
@@ -12,7 +12,6 @@ function Inventory({ inventory, setInventory, getInventory }) {
               ingredient={ingredient}
               inventory={inventory}
               setInventory={setInventory}
-              getInventory={getInventory}
             ></Ingredient>
           );
         })

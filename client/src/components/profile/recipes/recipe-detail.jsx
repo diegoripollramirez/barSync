@@ -1,122 +1,57 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import Navbar from "../../nav-bar/nav-bar";
 import Ingredient from "../inventory/ingredient";
+import { addFavorite } from "../../../services/favoritesServices";
+import { removeFavorite } from "../../../services/favoritesServices";
+import { getDrinkDetails } from "../../../services/recipeServices";
 
-function RecipeDetail() {
+
+function RecipeDetail({ recipe, inventory, setInventory, favorites, setFavorites }) {
+  const [favorited, setFavorited] = useState(false);
   const [drinkDetail, setDrinkDetail] = useState(null);
   const [drinkIngredients, setDrinkIngredients] = useState([]);
-  const [inventory, setInventory] = useState([]);
-  const [favorited, setFavorited] = useState(false);
-  const [favorites, setFavorites] = useState([]);
-  const [favoriteIds, setFavoriteIds] = useState([]);
-
-  let params = useParams();
-  const drinkId = params.recipeId;
 
   useEffect(() => {
-    if (!inventory.length) {
-      getInventory();
-    }
-    getFavorites();
-    getDrinkDetails(drinkId);
-    if (favorites.length) {
-      const arrOfIds = favorites.map((el) => el.idDrink);
-      setFavoriteIds(arrOfIds);
-    }
-    if (favoriteIds.includes(Number(drinkId))) {
+    const fetchDrinkDetails = async () => {
+      try {
+        const { drinkDetail, drinkIngredients } = await getDrinkDetails(recipe.idDrink);
+        setDrinkDetail(drinkDetail);
+        setDrinkIngredients(drinkIngredients);
+        setFavorited(favorites.some((fav) => fav.idDrink == Number(recipe.idDrink)));
+
+      } catch (error) {
+        console.error("Error loading drink details:", error);
+      }
+    }; fetchDrinkDetails();
+  }, []);
+
+  async function handleAddFavorite() {
+    try {
+      await addFavorite(recipe.idDrink, drinkDetail);
       setFavorited(true);
-    } else {
+      setFavorites((prevFavorites) => [
+        ...prevFavorites,
+        { idDrink: recipe.idDrink, ...drinkDetail },
+      ]);
+    } catch (error) {
+      console.error("Error adding to favorites:", error);
+    }
+  }
+
+  async function handleRemoveFavorite() {
+    try {
+      await removeFavorite(recipe.idDrink);
       setFavorited(false);
-    }
-  }, [favorited]);
-
-  async function getDrinkDetails(drinkId) {
-    const url = "http://localhost:3000/recipedetail/" + drinkId;
-    try {
-      const response = await fetch(url);
-      const fetchResponse = await response.json();
-      if (fetchResponse.drinks.length) {
-        const cocktailRecipe = fetchResponse.drinks[0];
-        const cocktailIngredients = [];
-        for (const key in cocktailRecipe) {
-          if (key.includes("strIngredient") && cocktailRecipe[key] !== null) {
-            cocktailIngredients.push({ strIngredient1: cocktailRecipe[key] });
-          }
-        }
-        setDrinkDetail(cocktailRecipe);
-        setDrinkIngredients(cocktailIngredients);
-      }
+      setFavorites((prevFavorites) =>
+        prevFavorites.filter((fav) => fav.idDrink !== recipe.idDrink)
+      );
     } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function getInventory() {
-    const url = "http://localhost:3000/inventory";
-    try {
-      const response = await fetch(url);
-      const fetchInventory = await response.json();
-      if (fetchInventory.length) {
-        setInventory(fetchInventory);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function getFavorites() {
-    const url = "http://localhost:3000/favorites";
-    try {
-      const response = await fetch(url);
-      const fetchFavorites = await response.json();
-      if (fetchFavorites.length) {
-        setFavorites(fetchFavorites);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function addFavorite() {
-    const title = drinkDetail.strDrink;
-    const thumb = drinkDetail.strDrinkThumb;
-    try {
-      await fetch("http://localhost:3000/favorites", {
-        method: "POST",
-        body: JSON.stringify({
-          idDrink: drinkId,
-          strDrinkThumb: thumb,
-          strDrink: title,
-        }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      setFavorited(true);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function removeFavorite() {
-    try {
-      await fetch("http://localhost:3000/favorites", {
-        method: "DELETE",
-        body: JSON.stringify({ idDrink: drinkId }),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      setFavorited(false);
-    } catch (error) {
-      console.log(error);
+      console.error("Error removing from favorites:", error);
     }
   }
 
   return (
     <>
-      <Navbar></Navbar>
+
       <div className="recipe-detail-container">
         {drinkDetail ? (
           <>
@@ -137,7 +72,6 @@ function RecipeDetail() {
                       ingredient={ingredient}
                       inventory={inventory}
                       setInventory={setInventory}
-                      getInventory={getInventory}
                     />
                   );
                 })
@@ -162,7 +96,7 @@ function RecipeDetail() {
                 </p>
                 <button
                   className="ingredient-button"
-                  onClick={favorited ? removeFavorite : addFavorite}
+                  onClick={favorited ? handleRemoveFavorite : handleAddFavorite}
                 >
                   {favorited
                     ? String.fromCodePoint("0x1F494")

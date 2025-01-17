@@ -1,8 +1,8 @@
 'use strict'
 
 const url = "http://localhost:3000/inventory";
-export async function getInventory() {
 
+export async function getInventory() {
   try {
     const response = await fetch(url);
     const fetchInventory = await response.json();

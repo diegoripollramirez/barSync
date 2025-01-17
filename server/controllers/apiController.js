@@ -17,7 +17,7 @@ exports.getIngredientList = async (req, res) => {
 };
 
 exports.getFilteredRecipes = async (req, res) => {
-  const convertedFilter = req.params.filter.replaceAll("9", ",");
+  const convertedFilter = req.params.filter.replaceAll("|", ",");
 
   const recipeListUrl = url + api_key + "/filter.php?i=" + convertedFilter;
   try {

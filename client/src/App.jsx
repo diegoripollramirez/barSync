@@ -11,6 +11,7 @@ function App() {
   const [inventory, setInventory] = useState([]);
   const [favorites, setFavorites] = useState([]);
   const [currentTab, setCurrentTab] = useState('Home');
+  const [selectedRecipe, setSelectedRecipe] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,6 +35,8 @@ function App() {
             inventory={inventory}
             setInventory={setInventory}
             getInventory={getInventory}
+            selectedRecipe={selectedRecipe}
+            setSelectedRecipe={setSelectedRecipe}
             favorites={favorites}
             setFavorites={setFavorites}
             getFavorites={getFavorites}
@@ -48,17 +51,20 @@ function App() {
         );
       case 'RecipeList':
         return (
-          <RecipeList inventory={inventory} />
-        );
-      default:
-        return (
-          <Profile inventory={inventory} />
+          <RecipeList
+            inventory={inventory}
+            setInventory={setInventory}
+            selectedRecipe={selectedRecipe}
+            setSelectedRecipe={setSelectedRecipe}
+            favorites={favorites}
+            setFavorites={setFavorites}
+          />
         );
     }
   }
 
   return <div>
-    <Navbar setCurrentTab={setCurrentTab} />
+    <Navbar setCurrentTab={setCurrentTab} setSelectedRecipe={setSelectedRecipe} />
     {renderTab()}
   </div>
 
