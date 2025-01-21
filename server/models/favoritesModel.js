@@ -2,11 +2,16 @@
 
 module.exports = (sequelize, DataTypes) => {
   const favorites = sequelize.define("favorite", {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,      
+      primaryKey: true,
+      autoIncrement: true,
+    },
     idDrink: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      unique: true,
-      primaryKey: true,
+      
     },
     strDrinkThumb: {
       type: DataTypes.STRING,
@@ -16,10 +21,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    // id: {
-    //   type: DataTypes.UUID,
-    //   allowNull: false,
-    // },
+    user_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   });
 
   // favorites.associate = (models) => {
