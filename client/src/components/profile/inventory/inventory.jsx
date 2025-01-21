@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import Ingredient from "./ingredient";
 
-function Inventory({ inventory, setInventory }) {
+function Inventory({ inventory, setInventory, token }) {
   return (
     <>
       <h2 className="subtitle">Inventory:</h2>
@@ -12,6 +13,7 @@ function Inventory({ inventory, setInventory }) {
               ingredient={ingredient}
               inventory={inventory}
               setInventory={setInventory}
+              token={token}
             ></Ingredient>
           );
         })

@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import Ingredient from "./ingredient";
 import { getFullIngredientList } from "../../../services/ingredientServices";
 
-function IngredientSearch({ inventory, setInventory }) {
+function IngredientSearch({ inventory, setInventory, token }) {
   const [fullIngredientList, setFullIngredientList] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [filteredIngredientList, setFilteredIngredientList] = useState([]);
@@ -60,6 +61,7 @@ function IngredientSearch({ inventory, setInventory }) {
                   ingredient={ingredient}
                   inventory={inventory}
                   setInventory={setInventory}
+                  token={token}
                 ></Ingredient>
               );
             }))

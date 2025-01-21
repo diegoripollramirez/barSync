@@ -2,11 +2,10 @@
 import { useState } from "react";
 import "./auth.css";
 
-const Login = ({setCurrentTab}) => {
+const Login = ({setCurrentTab, setToken}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -27,7 +26,9 @@ const Login = ({setCurrentTab}) => {
 
       const { token } = data;
       localStorage.setItem("token", token);
-      setCurrentTab('Home')
+      console.log("token desde login: ", token)
+      setToken(token);      
+      setCurrentTab('Home');
     } catch (error) {
       setError(error.message);
       console.error(error);

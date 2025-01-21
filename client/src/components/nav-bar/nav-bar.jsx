@@ -1,20 +1,25 @@
 /* eslint-disable react/prop-types */
-import { useNavigate } from "react-router-dom";
+
 import barSyncLogo from "../../assets/barSync_logo.png";
 
-function Navbar({ setCurrentTab, setSelectedRecipe}) {
-  const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+function Navbar({ setCurrentTab, setSelectedRecipe, setInventory, setFavorites, token, setToken}) {
+ 
+  // const token = localStorage.getItem("token");
 
   const handleLogout = () => {
-    localStorage.removeItem("token");    
-    navigate("/login");
+    localStorage.removeItem("token");
+    setToken("")
+    setInventory([])
+    setFavorites([])
+    setCurrentTab('Home')
   };
 
   function handleButton(tab) {
     setCurrentTab(tab);
     setSelectedRecipe("");
   }
+
+  
 
   return (
     <div className="navbar">

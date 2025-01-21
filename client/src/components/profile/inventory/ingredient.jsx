@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import { addIngredient } from "../../../services/inventoryServices";
 import { removeIngredient } from "../../../services/inventoryServices";
 
-function Ingredient({ ingredient, inventory, setInventory }) {
+function Ingredient({ ingredient, inventory, setInventory, token }) {
 
   const [added, setAdded] = useState(false);
   const plainTextInventory = inventory.map((el) => el.strIngredient1);
-  const token = localStorage.getItem("token")
+  
 
   useEffect(() => {
     if (
@@ -20,10 +20,11 @@ function Ingredient({ ingredient, inventory, setInventory }) {
     }
   }, [inventory]);
 
-  async function addToInventory(ingredient) {
+  async function addToInventory(ingredient, token) {
     try {
+      console.log(token);
       if (token){
-      await addIngredient(ingredient);
+      await addIngredient(ingredient, token);
       }
       setInventory((prev) => [...prev, ingredient]);
     } catch (error) {
@@ -32,10 +33,10 @@ function Ingredient({ ingredient, inventory, setInventory }) {
   }
 
   
-  async function removeFromInventory(ingredient) {
+  async function removeFromInventory(ingredient, token) {
     try {
       if (token){
-      await removeIngredient(ingredient);
+      await removeIngredient(ingredient, token);
       }
       setInventory((prevInventory) =>
         prevInventory.filter(
@@ -52,7 +53,7 @@ function Ingredient({ ingredient, inventory, setInventory }) {
         <button
           className="ingredient-button"
           onClick={() =>
-            added ? removeFromInventory(ingredient) : addToInventory(ingredient)
+            added ? removeFromInventory(ingredient, token) : addToInventory(ingredient, token)
           }
         >
           {added

@@ -13,23 +13,26 @@ function App() {
   const [favorites, setFavorites] = useState([]);
   const [currentTab, setCurrentTab] = useState('Home');
   const [selectedRecipe, setSelectedRecipe] = useState(null);
-  const token = localStorage.getItem("token");
+  const [token, setToken] = useState(localStorage.getItem("token"));
+ 
+  const fetchData = async () => {
+    try {
+      const inv = await getInventory(token);
+      setInventory(inv);
 
-  useEffect(() => {
-    if (token) {
-    const fetchData = async () => {
-      try {
-        const inv = await getInventory();
-        setInventory(inv);
+      const fav = await getFavorites(token);
+      setFavorites(fav);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-        const fav = await getFavorites();
-        setFavorites(fav);
-      } catch (error) {
-        console.log(error);
-      }
-    };
+  useEffect(() => {    
+    console.log("token changed: ", token)
+    if (token) { 
+      console.log("we have token, fetching data: ", token)
     fetchData();}
-  }, []);
+  }, [token]);
   
   const renderTab = () => {
     switch (currentTab) {
@@ -42,6 +45,7 @@ function App() {
             setSelectedRecipe={setSelectedRecipe}
             favorites={favorites}
             setFavorites={setFavorites}
+            token={token}
           />
         );
       case 'IngredientSearch':
@@ -49,6 +53,7 @@ function App() {
           <IngredientSearch
             inventory={inventory}
             setInventory={setInventory}
+            token={token}
           />
         );
       case 'RecipeList':
@@ -60,18 +65,21 @@ function App() {
             setSelectedRecipe={setSelectedRecipe}
             favorites={favorites}
             setFavorites={setFavorites}
+            token={token}
           />
         );
         case 'Login':
         return (
           <Login
-            setCurrentTab={setCurrentTab}
+          setToken={setToken}
+          setCurrentTab={setCurrentTab}  
           />
         );
         case 'Register':
         return (
           <Register
-            setCurrentTab={setCurrentTab}
+          setToken={setToken}
+          setCurrentTab={setCurrentTab}
           />
         );
       default:
@@ -80,7 +88,14 @@ function App() {
   };
 
   return <div>
-  <Navbar setCurrentTab={setCurrentTab} setSelectedRecipe={setSelectedRecipe} />
+  <Navbar 
+  setCurrentTab={setCurrentTab}
+  setSelectedRecipe={setSelectedRecipe}
+  setInventory={setInventory}
+  setFavorites={setFavorites}
+  token={token}
+  setToken={setToken}
+  />
   {renderTab()}
   </div>
 }

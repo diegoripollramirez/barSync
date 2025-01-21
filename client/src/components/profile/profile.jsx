@@ -2,7 +2,8 @@
 import Inventory from "./inventory/inventory";
 import RecipeDetail from "./recipes/recipe-detail";
 
-function Profile({ inventory, setInventory, favorites, setFavorites, selectedRecipe, setSelectedRecipe }) {
+function Profile({ inventory, setInventory, favorites, setFavorites, selectedRecipe, setSelectedRecipe, token }) {
+  console.log("token desde profile",token)
   return (
     <>
       {selectedRecipe ? (
@@ -34,6 +35,7 @@ function Profile({ inventory, setInventory, favorites, setFavorites, selectedRec
               <Inventory
                 inventory={inventory}
                 setInventory={setInventory}
+                token={token}
               ></Inventory>
             </div>
           </div>

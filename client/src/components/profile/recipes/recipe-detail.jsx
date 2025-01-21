@@ -11,12 +11,12 @@ function RecipeDetail({
   setInventory,
   favorites,
   setFavorites,
+  token
 }) {
   const [favorited, setFavorited] = useState(false);
   const [drinkDetail, setDrinkDetail] = useState(null);
   const [drinkIngredients, setDrinkIngredients] = useState([]);
-  const token = localStorage.getItem("token");
-  console.log("Esto", token);
+  
 
   useEffect(() => {
     const fetchDrinkDetails = async () => {
@@ -39,17 +39,14 @@ function RecipeDetail({
   async function handleAddFavorite() {
     try {
       if (token) {
-        await addFavorite(recipe.idDrink, drinkDetail);
+        await addFavorite(recipe.idDrink, drinkDetail, token);
       }
       setFavorited(true);
       setFavorites((prevFavorites) => [
         ...prevFavorites,
         { idDrink: recipe.idDrink, ...drinkDetail },
       ]);
-      setFavorites((prevFavorites) => [
-        ...prevFavorites,
-        { idDrink: recipe.idDrink, ...drinkDetail },
-      ]);
+      
     } catch (error) {
       console.error("Error adding to favorites:", error);
       
@@ -60,7 +57,7 @@ function RecipeDetail({
   async function handleRemoveFavorite() {
     try {
       if (token) {
-        await removeFavorite(recipe.idDrink);
+        await removeFavorite(recipe.idDrink, token);
       }
       setFavorited(false);
       setFavorites((prevFavorites) =>

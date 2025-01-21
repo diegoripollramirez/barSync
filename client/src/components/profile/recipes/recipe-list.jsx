@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import { getRecipes } from "../../../services/recipeServices";
 import RecipeDetail from "./recipe-detail";
 
-function RecipeList({ inventory, setInventory, selectedRecipe, setSelectedRecipe, favorites, setFavorites }) {
+function RecipeList({ inventory, setInventory, selectedRecipe, setSelectedRecipe, favorites, setFavorites, token}) {
   const [recipeFilters, setRecipeFilters] = useState([]);
   const [recipeList, setRecipeList] = useState([]);
 
@@ -50,6 +51,7 @@ function RecipeList({ inventory, setInventory, selectedRecipe, setSelectedRecipe
           setInventory={setInventory}
           favorites={favorites}
           setFavorites={setFavorites}
+          token={token}
         />
       ) : (
         <div className="recipe-list-container">

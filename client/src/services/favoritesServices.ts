@@ -1,11 +1,11 @@
 const url = "http://localhost:3000/favorites";
 
-export async function getFavorites() {
+export async function getFavorites(token) {
   try {
-    const token = localStorage.getItem("token");
     const response = await fetch(url, {
       method: "GET",
       headers: {
+        "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`,
       },
     });
@@ -22,9 +22,8 @@ export async function getFavorites() {
   }
 }
 
-export function addFavorite(drinkId, drinkDetail) {
+export function addFavorite(drinkId, drinkDetail, token) {
   const { strDrink, strDrinkThumb } = drinkDetail;
-  const token = localStorage.getItem("token");
 
   return fetch(url, {
     method: "POST",
@@ -39,8 +38,7 @@ export function addFavorite(drinkId, drinkDetail) {
   });
 }
 
-export function removeFavorite(drinkId) {
-  const token = localStorage.getItem("token");
+export function removeFavorite(drinkId, token) {
 
   return fetch(url, {
     method: "DELETE",

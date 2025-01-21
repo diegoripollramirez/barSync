@@ -3,7 +3,7 @@ import { useState } from "react";
 // import { useNavigate } from "react-router-dom";
 import "./auth.css";
 
-const Register = ({ setCurrentTab }) => {
+const Register = ({ setCurrentTab, setToken }) => {
   const [email, setEmail] = useState("");
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
@@ -35,7 +35,8 @@ const Register = ({ setCurrentTab }) => {
       }
 
       const { token } = data;
-      localStorage.setItem("token", token);      
+      localStorage.setItem("token", token);  
+      setToken(token)    
       setCurrentTab('Home');
     } catch (error) {
       setError(error.message);
