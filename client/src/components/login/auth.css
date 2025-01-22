@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 80vh;
 }
 
 .form {
@@ -118,11 +118,12 @@
   color: #fff;
   font-size: 16px;
   transform: .3s ease;
-  background-color: #3f8b41;
+  background-color: #3f8b41;  
 }
 
 .submit:hover {
   background-color: #0b5d0d96;
+  cursor: pointer;
 }
 
 .error {
@@ -145,6 +146,7 @@
 
 .link:hover {
   background-color: #0b5d0d96;
+  cursor: pointer;
 }
 
 @keyframes pulse {

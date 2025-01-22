@@ -2,15 +2,10 @@
 
 import barSyncLogo from "../../assets/barSync_logo.png";
 
-function Navbar({ setCurrentTab, setSelectedRecipe, setInventory, setFavorites, token, setToken}) {
- 
-  // const token = localStorage.getItem("token");
-
-  const handleLogout = () => {
+function Navbar({ setCurrentTab, setSelectedRecipe, token, setToken}) {
+   const handleLogout = () => {
     localStorage.removeItem("token");
-    setToken("")
-    setInventory([])
-    setFavorites([])
+    setToken("")  
     setCurrentTab('Home')
   };
 
@@ -18,8 +13,7 @@ function Navbar({ setCurrentTab, setSelectedRecipe, setInventory, setFavorites, 
     setCurrentTab(tab);
     setSelectedRecipe("");
   }
-
-  
+ 
 
   return (
     <div className="navbar">

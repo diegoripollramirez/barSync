@@ -32,6 +32,10 @@ function App() {
     if (token) { 
       console.log("we have token, fetching data: ", token)
     fetchData();}
+    else {
+      setInventory([])
+      setFavorites([])
+    }
   }, [token]);
   
   const renderTab = () => {
