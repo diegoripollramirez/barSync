@@ -9,9 +9,9 @@ router.get("/inventory", inventoryController.getInventory);
 router.post("/inventory", inventoryController.addIngredient);
 router.delete("/inventory", inventoryController.removeIngredient);
 
-router.get("/favorites", authMiddleware, favoriteController.getFavorites);
-router.post("/favorites", authMiddleware, favoriteController.addFavorite);
-router.delete("/favorites", authMiddleware, favoriteController.removeFavorite);
+router.get("/favorites", favoriteController.getFavorites);
+router.post("/favorites", favoriteController.addFavorite);
+router.delete("/favorites", favoriteController.removeFavorite);
 
 router.get("/ingredient_list", apiController.getIngredientList);
 router.get("/recipedetail/:drinkId", apiController.getRecipeDetails);

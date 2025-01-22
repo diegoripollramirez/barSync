@@ -1,14 +1,13 @@
 "use strict";
 
 require("dotenv").config();
-const express = require("express");
-const router = require("./router.js");
-const cors = require("cors");
-const db = require("./models/index.js");
-const session = require("express-session");
-const app = express();
-const port = process.env.PORT;
-const SECRET = process.env.SECRET;
+import express, { Express } from "express";
+import router from "./router";
+import cors from "cors";
+import { db } from "./models/index";
+const app: Express = express();
+const port = process.env.PORT || 0;
+
 
 app.use(cors());
 app.use(express.json());

@@ -1,7 +1,8 @@
-const jwt = require("jsonwebtoken");
+/* const jwt = require("jsonwebtoken");
 
 const authMiddleware = async (req, res, next) => {
   try {
+    console.log("header es: ",req.headers.authorization)
     const token = req.headers.authorization?.split(" ")[1];
 
     if (!token) {
@@ -10,7 +11,7 @@ const authMiddleware = async (req, res, next) => {
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.newUser = decoded;
-    console.log(decoded, process.env.JWT_SECRET)
+    console.log("el decoded es: ",decoded)
 
     next();
   } catch (error) {
@@ -19,4 +20,4 @@ const authMiddleware = async (req, res, next) => {
   }
 };
 
-module.exports = authMiddleware;
+module.exports = authMiddleware; */
