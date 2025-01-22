@@ -13,6 +13,7 @@ function Profile({ inventory, setInventory, favorites, setFavorites, selectedRec
           setInventory={setInventory}
           favorites={favorites}
           setFavorites={setFavorites}
+          token={token}
         />
       ) : (
         <div className="profile-container">
