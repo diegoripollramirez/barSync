@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "dev": "nodemon index.js"
   },
   "author": "",
@@ -11,6 +11,7 @@
   "description": "",
   "dependencies": {
     "bcrypt": "^5.1.1",
+    "chai": "^5.1.2",
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "express-session": "^1.18.1",
@@ -23,7 +24,9 @@
     "@types/express": "^5.0.0",
     "@types/express-session": "^1.18.1",
     "@types/jsonwebtoken": "^9.0.7",
+    "chai-http": "^5.1.1",
     "dotenv": "^16.4.7",
+    "mocha": "^11.1.0",
     "nodemon": "^3.1.9"
   }
 }
