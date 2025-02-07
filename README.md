@@ -83,9 +83,9 @@ from both the client and server folders.
 
 👤 **Benjamin McCarthy**
 
--Github: [@dripstltd](https://github.com/dripstaltd)
-
 - created the excellent logo
+
+- Github: [@dripstltd](https://github.com/dripstaltd)
 
 ## Show your support
 
