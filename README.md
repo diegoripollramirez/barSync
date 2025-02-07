@@ -1,4 +1,6 @@
+<div style="display:flex; align-items:center; width:100%;">
 <img src="/client/src/assets/barSync_logo.svg" style="height:100px;" align="center"/>
+</div>
 </br>
 <h1 align="center">Welcome to barSync 👋</h1>
 
@@ -18,6 +20,7 @@ barSync is a web app that helps users manage their cocktail ingredients and disc
 ## Screenshot
 
 <img src="/client/src/assets/screenshot.png" />
+
 ## Tech stack
 
 barSync is built with a react front end styled with vanilla CSS. The back end runs off an express server linked in to a postgres SQL database using sequelize ORM.
