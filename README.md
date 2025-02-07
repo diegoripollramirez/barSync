@@ -1,7 +1,3 @@
-<div style="display:flex; align-items:center; width:100%;">
-<img src="/client/src/assets/barSync_logo.svg" style="height:100px;" align="center"/>
-</div>
-</br>
 <h1 align="center">Welcome to barSync 👋</h1>
 
 <p>
