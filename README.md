@@ -1,5 +1,3 @@
-<img src="/client/src/assets/barSync_logo.svg" style="height:100px;" align="center"/>
-
 <h1 align="center">Welcome to barSync 👋</h1>
 
 <p>
@@ -15,9 +13,23 @@
 
 barSync is a web app that helps users manage their cocktail ingredients and discover new drinks. Users can easily track the ingredients they have at home, and use these ingredients to filter for cocktails which they can make with those ingredients.
 
-## tech stack
+## Screenshot
+
+<img src="/client/src/assets/screenshot.png" />
+
+## Tech stack
 
 barSync is built with a react front end styled with vanilla CSS. The back end runs off an express server linked in to a postgres SQL database using sequelize ORM.
+
+### Getting started:
+
+This project requires node.js and npm so please make sure you have these installed and working correctly!
+
+First clone this repo:
+
+```sh
+git clone https://github.com/Billhaigh13/barSync.git
+```
 
 ### Please note:
 
@@ -65,12 +77,15 @@ from both the client and server folders.
 👤 **Bill Haigh**
 
 - Github: [@Billhaigh13](https://github.com/Billhaigh13)
+- LinkedIn: [@BillHaigh](https://www.linkedin.com/in/bill-a-a44234240/)
 
 ## Credit
 
 👤 **Benjamin McCarthy**
 
 - created the excellent logo
+
+- Github: [@dripstltd](https://github.com/dripstaltd)
 
 ## Show your support
 
